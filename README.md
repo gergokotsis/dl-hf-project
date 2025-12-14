@@ -26,13 +26,16 @@ The repository is structured as follows:
 
 src/: Contains the source code for the machine learning pipeline.
 
-01-data-preprocessing.py: Scripts for loading, cleaning, and preprocessing the raw data.
-02-training.py: The main script for defining the model and executing the training loop.
-03-evaluation.py: Scripts for evaluating the trained model on test data and generating metrics.
-notebook/: Contains Jupyter notebooks for analysis and experimentation.
+01-data-preprocessing.py: Adatok betöltése, előfeldolgozása
+02-training.py: Baseline modell betanítása, végső modell betanítása
+03-evaluation.py: Modellek kiértékelése, eredmények mentése
+notebook/: Feladathoz használt notebook mappája
+
+model_development.ipynb: Adatok elemnzése, modelltanítási kísérletek
 
 Root Directory:
 
 Dockerfile: Configuration file for building the Docker image with the necessary environment and dependencies.
 requirements.txt: List of Python dependencies required for the project.
 README.md: Project documentation and instructions.
+A feladat megoldásában igénybe vettem LLM-ek segítségét. (ChatGPT, Gemini)
