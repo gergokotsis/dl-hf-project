@@ -21,9 +21,9 @@ This project is containerized using Docker. Follow the instructions below to bui
 
 ### Build
 Run the following command in the root directory of the repository to build the Docker image:
-
+```bash
 docker build -t dl-project .
-
+```
 ### Run
 To run the solution, use the following command:
 ```bash
