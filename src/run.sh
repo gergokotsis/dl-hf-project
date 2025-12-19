@@ -2,12 +2,14 @@
 set -e
 
 echo "Running data processing..."
-python 01_data_processing.py
+python src/01_data_processing.py
 
 echo "Running model training..."
-python 02_train.py
+python src/02_train.py
 
 echo "Running evaluation..."
-python 03_evaluation.py
+python src/03_evaluation.py
 
+echo "Running inference..."
+python src/04_inference.py
 echo "Pipeline finished successfully."

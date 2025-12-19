@@ -14,12 +14,13 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
+ENV PYTHONPATH=/app
 # 5. Copy source code
-COPY src/ .
+COPY src/ src/
 
 # 6. Make run.sh executable
-RUN chmod +x run.sh
+RUN chmod +x src/run.sh
 
 # 7. Default command
-CMD ["bash", "run.sh"]
+CMD ["bash", "src/run.sh"]
 
