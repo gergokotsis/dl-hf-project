@@ -9,9 +9,9 @@ The 01-data-preprocessing.py script uses the given link to download the data (le
 
 ## Project Details
 ### Project Information
-Selected Topic: Legal Text Decoder
-Student Name: Kotsis Gergő
-Aiming for +1 Mark: No
+* Selected Topic: Legal Text Decoder
+* Student Name: Kotsis Gergő
+* Aiming for +1 Mark: No
 ### Solution Description:
 
 The task is a classification problem, where we have to decide how hard it is to understand a given legal text (ÁSZF) snippet. I solved the problem with an NLP solution. During the model development process I started by creating a simple TF-IDF + MLP model, that is my baseline model. After this I tried different technologies to make the model better. Tried technologies: Bag of Words, LSTM, GRU, Embedding, Dropout layers, L2 regularization, weighting the training data (imbalaced dataset). The final model is has an embedding layer that is followed by an MLP. This model gave me the best results. The final results show, that the final model is about 9% more accurate then the baseline model, that I started with, and 19% better, then guessing randomly.
@@ -48,23 +48,23 @@ The container is configured to run every step (data preprocessing, training, eva
 
 The repository is structured as follows:
 
-src/: Contains the source code for the machine learning pipeline.
+* **src/:** Contains the source code for the machine learning pipeline.
 
-01-data-preprocessing.py: Script for loading, cleaning, and preprocessing the raw data.
-02-training.py: The main script for spliting the data, defining the model and executing the training loop.
-03-evaluation.py: Script for evaluating the trained baseline model and final model on test data and generating metrics.
-04-inference.py: Script for running the model on new, unseen data to generate predictions.
-config.py: Configuration file containing hyperparameters (e.g., epochs) and paths.
-utils.py: Helper functions and utilities used across different scripts.
-notebook/: Contains Jupyter notebook for experimentation.
+    * 01-data-preprocessing.py: Script for loading, cleaning, and preprocessing the raw data.
+    * 02-training.py: The main script for spliting the data, defining the model and executing the training loop.
+    * 03-evaluation.py: Script for evaluating the trained baseline model and final model on test data and generating metrics.
+    * 04-inference.py: Script for running the model on new, unseen data to generate predictions.
+    * config.py: Configuration file containing hyperparameters (e.g., epochs) and paths.
+    * utils.py: Helper functions and utilities used across different scripts.
+* notebook/: Contains Jupyter notebook for experimentation.
 
-model_development.ipynb: Jupyter notebook containing the experimentation, that led to the final model.
+    * model_development.ipynb: Jupyter notebook containing the experimentation, that led to the final model.
 
-log/: Contains log files.
+* log/: Contains log files.
 
-run.log: Example log file showing the output of a successful training run. When the program is run with the command, that captures logs, the new logs override the old logs. (The current run.log file contains warnings, because it did not found a GPU, it should be fine when run on a container, that can use a GPU.)
-Root Directory:
+    * run.log: Example log file showing the output of a successful training run. When the program is run with the command, that captures logs, the new logs override the old logs. (The current run.log file contains warnings, because it did not found a GPU, it should be fine when run on a container, that can use a GPU.)
+* Root Directory:
 
-Dockerfile: Configuration file for building the Docker image with the necessary environment and dependencies.
-requirements.txt: List of Python dependencies required for the project.
-README.md: Project documentation and instructions.
+    * Dockerfile: Configuration file for building the Docker image with the necessary environment and dependencies.
+    * requirements.txt: List of Python dependencies required for the project.
+    * README.md: Project documentation and instructions.
