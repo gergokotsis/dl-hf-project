@@ -69,4 +69,4 @@ The repository is structured as follows:
     * Dockerfile: Configuration file for building the Docker image with the necessary environment and dependencies.
     * requirements.txt: List of Python dependencies required for the project.
     * README.md: Project documentation and instructions.
-    * .gitattributes: Responsible for making sure git does not change LF to CRLF on the run.sh file 
+    * .gitattributes: Responsible for making sure git does not change LF to CRLF on the run.sh file.
