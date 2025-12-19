@@ -8,23 +8,23 @@ Basic Level (for signature)
 The 01-data-preprocessing.py script uses the given link to download the data (legaltextdecoder.txt) from Microsoft Sharepoint. The script finds the json files containing the data. The consensus folder is excluded. The data is extracted from the json files. After this the script does minor data cleaning, and checks for duplicates. After some analysis it saves the created dataset. The data is split into training, validation and test sets in the training script.
 
 ## Project Details
-# Project Information
+### Project Information
 Selected Topic: Legal Text Decoder
 Student Name: Kotsis Gergő
 Aiming for +1 Mark: No
-# Solution Description:
+### Solution Description:
 
 The task is a classification problem, where we have to decide how hard it is to understand a given legal text (ÁSZF) snippet. I solved the problem with an NLP solution. During the model development process I started by creating a simple TF-IDF + MLP model, that is my baseline model. After this I tried different technologies to make the model better. Tried technologies: Bag of Words, LSTM, GRU, Embedding, Dropout layers, L2 regularization, weighting the training data (imbalaced dataset). The final model is has an embedding layer that is followed by an MLP. This model gave me the best results. The final results show, that the final model is about 9% more accurate then the baseline model, that I started with, and 19% better, then guessing randomly.
 
 ## Docker Instructions
 This project is containerized using Docker. Follow the instructions below to build and run the solution.
 
-# Build
+### Build
 Run the following command in the root directory of the repository to build the Docker image:
 
 docker build -t dl-project .
 
-# Run
+### Run
 To run the solution, use the following command:
 ```bash
 docker run dl-project > log/run.log 2>&1
