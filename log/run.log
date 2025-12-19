@@ -1,0 +1,310 @@
+Running data processing...
+2025-12-19 15:42:03,015 | INFO | ===== STARTING DATA PREPARATION PIPELINE =====
+2025-12-19 15:42:03,015 | INFO | Downloading dataset from SharePoint...
+2025-12-19 15:42:04,292 | INFO | Dataset successfully downloaded → /data/legaltextdecoder.zip
+2025-12-19 15:42:04,293 | INFO | Extracting ZIP file from /data/legaltextdecoder.zip
+2025-12-19 15:42:04,349 | INFO | ZIP extraction completed → /data/extracted
+2025-12-19 15:42:04,349 | INFO | Parsing JSON files...
+2025-12-19 15:42:04,421 | INFO | Total raw JSON samples loaded: 3897
+2025-12-19 15:42:04,512 | INFO | Samples after cleaning: 3747
+2025-12-19 15:42:04,514 | INFO | Duplicate texts detected: 354
+2025-12-19 15:42:04,515 | INFO | Samples after removing duplicates: 3393
+2025-12-19 15:42:04,515 | INFO | Label distribution:
+2025-12-19 15:42:04,517 | INFO | 
+label
+5-Könnyen érthető           1086
+4-Érthető                   1023
+3-Többé/kevésbé megértem     721
+2-Nehezen érthető            387
+1-Nagyon nehezen érthető     176
+Name: count, dtype: int64
+2025-12-19 15:42:04,533 | INFO | Text length statistics:
+2025-12-19 15:42:04,536 | INFO | 
+count    3393.000000
+mean       50.390510
+std        56.480726
+min         1.000000
+25%        21.000000
+50%        38.000000
+75%        62.000000
+max      1186.000000
+2025-12-19 15:42:04,537 | INFO | Class imbalance analysis:
+2025-12-19 15:42:04,537 | INFO | 
+label
+5-Könnyen érthető           1086
+4-Érthető                   1023
+3-Többé/kevésbé megértem     721
+2-Nehezen érthető            387
+1-Nagyon nehezen érthető     176
+Name: count, dtype: int64
+2025-12-19 15:42:04,537 | INFO | Imbalance ratio (max/min): 6.17
+2025-12-19 15:42:04,538 | INFO | Texts with fewer than 5 words: 93
+2025-12-19 15:42:04,568 | INFO | Saved 3393 processed samples → /data/processed_data.csv
+2025-12-19 15:42:04,568 | INFO | ===== DATA PREPARATION COMPLETED SUCCESSFULLY =====
+Running model training...
+2025-12-19 15:42:05.069158: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-19 15:42:05.073358: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-19 15:42:05.084742: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1766158925.101826      11 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1766158925.107730      11 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1766158925.122806      11 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158925.122847      11 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158925.122852      11 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158925.122854      11 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-12-19 15:42:05.127881: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-12-19 15:42:08,678 | INFO | ===== TRAINING CONFIGURATION =====
+2025-12-19 15:42:08,678 | INFO | RAW_ZIP_PATH: /data/legaltextdecoder.zip
+2025-12-19 15:42:08,678 | INFO | RAW_EXTRACT_PATH: /data/extracted
+2025-12-19 15:42:08,678 | INFO | PROCESSED_DATA_PATH: /data/processed_data.csv
+2025-12-19 15:42:08,678 | INFO | BASE_DIR: /app
+2025-12-19 15:42:08,678 | INFO | OUTPUT_DIR: /app/output
+2025-12-19 15:42:08,678 | INFO | LOG_DIR: /app/log
+2025-12-19 15:42:08,678 | INFO | SEED: 42
+2025-12-19 15:42:08,678 | INFO | TEST_SIZE: 0.25
+2025-12-19 15:42:08,678 | INFO | VAL_SIZE: 0.4
+2025-12-19 15:42:08,678 | INFO | TFIDF_MAX_FEATURES: 2000
+2025-12-19 15:42:08,678 | INFO | TFIDF_NGRAM_RANGE: (1, 2)
+2025-12-19 15:42:08,678 | INFO | MAX_VOCAB: 10000
+2025-12-19 15:42:08,678 | INFO | MAX_LEN: 100
+2025-12-19 15:42:08,678 | INFO | EMBEDDING_DIM: 32
+2025-12-19 15:42:08,678 | INFO | EPOCHS_BASELINE: 20
+2025-12-19 15:42:08,678 | INFO | EPOCHS_FINAL: 20
+2025-12-19 15:42:08,678 | INFO | BATCH_SIZE: 16
+2025-12-19 15:42:08,679 | INFO | LEARNING_RATE: 0.001
+2025-12-19 15:42:08,679 | INFO | EARLY_STOP_PATIENCE: 5
+2025-12-19 15:42:08,679 | INFO | BASELINE_MODEL_PATH: /app/output/baseline_model.keras
+2025-12-19 15:42:08,679 | INFO | FINAL_MODEL_PATH: /app/output/final_model.keras
+2025-12-19 15:42:08,679 | INFO | TOKENIZER_PATH: /app/output/tokenizer.joblib
+2025-12-19 15:42:08,679 | INFO | TFIDF_PATH: /app/output/tfidf.joblib
+2025-12-19 15:42:08,679 | INFO | LABEL_ENCODER_PATH: /app/output/label_encoder.joblib
+2025-12-19 15:42:08,712 | INFO | Data loaded: 3393 samples
+2025-12-19 15:42:08,718 | INFO | Dataset split completed:
+2025-12-19 15:42:08,718 | INFO | Train samples: 2544
+2025-12-19 15:42:08,718 | INFO | Validation samples: 509
+2025-12-19 15:42:08,718 | INFO | Test samples: 340
+2025-12-19 15:42:08,730 | INFO | ===== BASELINE MODEL HYPERPARAMETERS =====
+2025-12-19 15:42:08,730 | INFO | TFIDF_MAX_FEATURES: 2000
+2025-12-19 15:42:08,730 | INFO | TFIDF_NGRAM_RANGE: (1, 2)
+2025-12-19 15:42:08,730 | INFO | EPOCHS: 20
+2025-12-19 15:42:08,730 | INFO | BATCH_SIZE: 16
+2025-12-19 15:42:08,730 | INFO | LEARNING_RATE: 0.001
+/usr/local/lib/python3.11/dist-packages/keras/src/layers/core/dense.py:93: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+2025-12-19 15:42:09.199405: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+2025-12-19 15:42:09,251 | INFO | ===== MODEL ARCHITECTURE: TF-IDF BASELINE =====
+2025-12-19 15:42:09,257 | INFO | Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ dense (Dense)                   │ (None, 32)             │        64,032 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_1 (Dense)                 │ (None, 32)             │         1,056 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_2 (Dense)                 │ (None, 5)              │           165 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+ Total params: 65,253 (254.89 KB)
+ Trainable params: 65,253 (254.89 KB)
+ Non-trainable params: 0 (0.00 B)
+
+2025-12-19 15:42:09,257 | INFO | Starting baseline model training...
+2025-12-19 15:42:10.526081: E tensorflow/core/framework/node_def_util.cc:680] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op<name=MapDataset; signature=input_dataset:variant, other_arguments: -> handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=""> This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
+2025-12-19 15:42:10,801 | INFO | Epoch 1 | loss=1.5107 | acc=0.3039 | val_loss=1.4495 | val_acc=0.3733
+2025-12-19 15:42:11,249 | INFO | Epoch 2 | loss=1.3599 | acc=0.4281 | val_loss=1.3596 | val_acc=0.3831
+2025-12-19 15:42:11,769 | INFO | Epoch 3 | loss=1.1189 | acc=0.5452 | val_loss=1.3743 | val_acc=0.3851
+2025-12-19 15:42:12,220 | INFO | Epoch 4 | loss=0.8881 | acc=0.6647 | val_loss=1.4900 | val_acc=0.4028
+2025-12-19 15:42:12,717 | INFO | Epoch 5 | loss=0.6901 | acc=0.7575 | val_loss=1.6502 | val_acc=0.4086
+2025-12-19 15:42:13,102 | INFO | Epoch 6 | loss=0.5171 | acc=0.8404 | val_loss=1.8530 | val_acc=0.4086
+2025-12-19 15:42:13,529 | INFO | Epoch 7 | loss=0.3720 | acc=0.9041 | val_loss=2.0752 | val_acc=0.4106
+2025-12-19 15:42:13,942 | INFO | Epoch 8 | loss=0.2628 | acc=0.9414 | val_loss=2.3141 | val_acc=0.4165
+2025-12-19 15:42:14,361 | INFO | Epoch 9 | loss=0.1875 | acc=0.9642 | val_loss=2.5449 | val_acc=0.3949
+2025-12-19 15:42:14,833 | INFO | Epoch 10 | loss=0.1365 | acc=0.9725 | val_loss=2.7596 | val_acc=0.3929
+2025-12-19 15:42:15,289 | INFO | Epoch 11 | loss=0.1038 | acc=0.9792 | val_loss=2.9407 | val_acc=0.3949
+2025-12-19 15:42:15,698 | INFO | Epoch 12 | loss=0.0832 | acc=0.9823 | val_loss=3.1077 | val_acc=0.3890
+2025-12-19 15:42:16,368 | INFO | Epoch 13 | loss=0.0706 | acc=0.9827 | val_loss=3.2554 | val_acc=0.3851
+2025-12-19 15:42:16,780 | INFO | Epoch 14 | loss=0.0620 | acc=0.9831 | val_loss=3.3844 | val_acc=0.3792
+2025-12-19 15:42:17,291 | INFO | Epoch 15 | loss=0.0552 | acc=0.9843 | val_loss=3.4990 | val_acc=0.3772
+2025-12-19 15:42:17,752 | INFO | Epoch 16 | loss=0.0504 | acc=0.9858 | val_loss=3.6032 | val_acc=0.3792
+2025-12-19 15:42:18,187 | INFO | Epoch 17 | loss=0.0462 | acc=0.9862 | val_loss=3.7009 | val_acc=0.3792
+2025-12-19 15:42:18,625 | INFO | Epoch 18 | loss=0.0437 | acc=0.9862 | val_loss=3.7860 | val_acc=0.3733
+2025-12-19 15:42:19,125 | INFO | Epoch 19 | loss=0.0405 | acc=0.9874 | val_loss=3.8623 | val_acc=0.3733
+2025-12-19 15:42:19,543 | INFO | Epoch 20 | loss=0.0388 | acc=0.9870 | val_loss=3.9362 | val_acc=0.3635
+2025-12-19 15:42:19,579 | INFO | Baseline model saved to /app/output/baseline_model.keras
+2025-12-19 15:42:19,579 | INFO | ===== FINAL MODEL HYPERPARAMETERS =====
+2025-12-19 15:42:19,579 | INFO | MAX_VOCAB: 10000
+2025-12-19 15:42:19,580 | INFO | MAX_LEN: 100
+2025-12-19 15:42:19,580 | INFO | EMBEDDING_DIM: 32
+2025-12-19 15:42:19,581 | INFO | EPOCHS: 20
+2025-12-19 15:42:19,581 | INFO | BATCH_SIZE: 16
+2025-12-19 15:42:19,581 | INFO | LEARNING_RATE: 0.001
+2025-12-19 15:42:19,581 | INFO | EARLY_STOP_PATIENCE: 5
+2025-12-19 15:42:20,053 | INFO | Tokenizer saved to /app/output/tokenizer.joblib
+2025-12-19 15:42:20,279 | INFO | ===== MODEL ARCHITECTURE: FINAL EMBEDDING MODEL =====
+2025-12-19 15:42:20,285 | INFO | Model: "sequential_1"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ embedding (Embedding)           │ (None, 100, 32)        │       320,000 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ flatten (Flatten)               │ (None, 3200)           │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_3 (Dense)                 │ (None, 32)             │       102,432 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_4 (Dense)                 │ (None, 32)             │         1,056 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_5 (Dense)                 │ (None, 5)              │           165 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+ Total params: 423,653 (1.62 MB)
+ Trainable params: 423,653 (1.62 MB)
+ Non-trainable params: 0 (0.00 B)
+
+2025-12-19 15:42:20,285 | INFO | Starting final model training...
+2025-12-19 15:42:21.803696: E tensorflow/core/framework/node_def_util.cc:680] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op<name=MapDataset; signature=input_dataset:variant, other_arguments: -> handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=""> This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
+2025-12-19 15:42:22,017 | INFO | Epoch 1 | loss=1.3548 | acc=0.4061 | val_loss=1.3164 | val_acc=0.4283
+2025-12-19 15:42:22,790 | INFO | Epoch 2 | loss=1.1559 | acc=0.5586 | val_loss=1.3336 | val_acc=0.4224
+2025-12-19 15:42:23,439 | INFO | Epoch 3 | loss=0.5990 | acc=0.8070 | val_loss=1.5861 | val_acc=0.4126
+2025-12-19 15:42:24,145 | INFO | Epoch 4 | loss=0.1710 | acc=0.9524 | val_loss=1.9338 | val_acc=0.3929
+2025-12-19 15:42:24,847 | INFO | Epoch 5 | loss=0.0735 | acc=0.9803 | val_loss=2.0525 | val_acc=0.3929
+2025-12-19 15:42:25,673 | INFO | Epoch 6 | loss=0.0355 | acc=0.9894 | val_loss=2.2490 | val_acc=0.3615
+2025-12-19 15:42:25,723 | INFO | Final model saved to /app/output/final_model.keras
+Running evaluation...
+2025-12-19 15:42:27.465763: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-19 15:42:27.470126: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-19 15:42:27.482446: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1766158947.501921     650 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1766158947.507355     650 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1766158947.521947     650 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158947.521994     650 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158947.522000     650 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158947.522002     650 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-12-19 15:42:27.526386: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-12-19 15:42:29,868 | INFO | ===== STARTING MODEL EVALUATION =====
+2025-12-19 15:42:29,868 | INFO | Loading test data and encoders...
+2025-12-19 15:42:29,872 | INFO | Test samples: 340
+2025-12-19 15:42:29,872 | INFO | Classes: ['1-Nagyon nehezen érthető', '2-Nehezen érthető', '3-Többé/kevésbé megértem', '4-Érthető', '5-Könnyen érthető']
+2025-12-19 15:42:29,872 | INFO | ==================================================
+2025-12-19 15:42:29,872 | INFO | EVALUATION: RANDOM BASELINE
+2025-12-19 15:42:29,872 | INFO | ==================================================
+2025-12-19 15:42:29,876 | INFO | Test Accuracy: 0.2500
+2025-12-19 15:42:29,876 | INFO | Classification Report:
+2025-12-19 15:42:29,885 | INFO | 
+                          precision    recall  f1-score   support
+
+1-Nagyon nehezen érthető     0.0000    0.0000    0.0000        18
+       2-Nehezen érthető     0.2121    0.1795    0.1944        39
+3-Többé/kevésbé megértem     0.1351    0.1389    0.1370        72
+               4-Érthető     0.3365    0.3431    0.3398       102
+       5-Könnyen érthető     0.2821    0.3028    0.2920       109
+
+                accuracy                         0.2500       340
+               macro avg     0.1932    0.1929    0.1927       340
+            weighted avg     0.2443    0.2500    0.2469       340
+
+2025-12-19 15:42:29,885 | INFO | Confusion Matrix:
+2025-12-19 15:42:29,887 | INFO | 
+[[ 0  1  4  5  8]
+ [ 4  7  7  9 12]
+ [ 3  7 10 24 28]
+ [ 3  8 20 35 36]
+ [ 2 10 33 31 33]]
+2025-12-19 15:42:29.892941: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+2025-12-19 15:42:30,090 | INFO | ==================================================
+2025-12-19 15:42:30,090 | INFO | EVALUATION: TF-IDF BASELINE
+2025-12-19 15:42:30,091 | INFO | ==================================================
+2025-12-19 15:42:30,452 | INFO | Test Accuracy: 0.3529
+2025-12-19 15:42:30,452 | INFO | Test Loss:     4.1682
+2025-12-19 15:42:30,623 | INFO | Classification Report:
+2025-12-19 15:42:30,631 | INFO | 
+                          precision    recall  f1-score   support
+
+1-Nagyon nehezen érthető     0.3750    0.1667    0.2308        18
+       2-Nehezen érthető     0.1591    0.1795    0.1687        39
+3-Többé/kevésbé megértem     0.2791    0.3333    0.3038        72
+               4-Érthető     0.3084    0.3235    0.3158       102
+       5-Könnyen érthető     0.5579    0.4862    0.5196       109
+
+                accuracy                         0.3529       340
+               macro avg     0.3359    0.2979    0.3077       340
+            weighted avg     0.3686    0.3529    0.3572       340
+
+2025-12-19 15:42:30,632 | INFO | Confusion Matrix:
+2025-12-19 15:42:30,632 | INFO | 
+[[ 3  6  3  3  3]
+ [ 2  7 16 10  4]
+ [ 3  6 24 28 11]
+ [ 0 16 29 33 24]
+ [ 0  9 14 33 53]]
+2025-12-19 15:42:30,895 | INFO | ==================================================
+2025-12-19 15:42:30,895 | INFO | EVALUATION: FINAL EMBEDDING MODEL
+2025-12-19 15:42:30,895 | INFO | ==================================================
+2025-12-19 15:42:31,237 | INFO | Test Accuracy: 0.4412
+2025-12-19 15:42:31,237 | INFO | Test Loss:     1.2725
+2025-12-19 15:42:31,381 | INFO | Classification Report:
+/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2025-12-19 15:42:31,390 | INFO | 
+                          precision    recall  f1-score   support
+
+1-Nagyon nehezen érthető     0.0000    0.0000    0.0000        18
+       2-Nehezen érthető     0.5000    0.2821    0.3607        39
+3-Többé/kevésbé megértem     0.2222    0.0833    0.1212        72
+               4-Érthető     0.3720    0.5980    0.4586       102
+       5-Könnyen érthető     0.5669    0.6606    0.6102       109
+
+                accuracy                         0.4412       340
+               macro avg     0.3322    0.3248    0.3101       340
+            weighted avg     0.3977    0.4412    0.4002       340
+
+2025-12-19 15:42:31,392 | INFO | Confusion Matrix:
+2025-12-19 15:42:31,392 | INFO | 
+[[ 0  5  3  7  3]
+ [ 0 11  7 16  5]
+ [ 0  5  6 45 16]
+ [ 0  1  9 61 31]
+ [ 0  0  2 35 72]]
+2025-12-19 15:42:31,392 | INFO | ===== EVALUATION COMPLETED SUCCESSFULLY =====
+Running inference...
+2025-12-19 15:42:32.335703: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-19 15:42:32.340283: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-19 15:42:32.351579: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1766158952.368905     719 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1766158952.374551     719 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1766158952.388636     719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158952.388679     719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158952.388684     719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766158952.388686     719 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-12-19 15:42:32.392652: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-12-19 15:42:35,508 | INFO | ===== STARTING INFERENCE =====
+2025-12-19 15:42:35,509 | INFO | Loading label encoder...
+2025-12-19 15:42:35,519 | INFO | ===== BASELINE MODEL PREDICTIONS =====
+2025-12-19 15:42:35,519 | INFO | Running inference with TF-IDF baseline model
+2025-12-19 15:42:35.541662: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+2025-12-19 15:42:35,763 | INFO | ----------------------------------------
+2025-12-19 15:42:35,763 | INFO | TEXT: A Felek közötti megállapodást a jelen ÁSZF, a Szolgáltatási Szerződés és ezek mellékletei együttesen tartalmazzák. Bármilyen, a jelen ÁSZF, valamint a Szolgáltatási Szerződés és annak mellékletei eltérése esetén elsősorban a Szolgáltatási Szerződés és másodsorban a jelen ÁSZF rendelkezései az irányadóak.
+2025-12-19 15:42:35,763 | INFO | PREDICTED LABEL: 3-Többé/kevésbé megértem
+2025-12-19 15:42:35,763 | INFO | CONFIDENCE: 0.9512
+2025-12-19 15:42:35,763 | INFO | ----------------------------------------
+2025-12-19 15:42:35,764 | INFO | TEXT: Az Ügyfél köteles a Szolgáltatás igénybevételekor az erre vonatkozó jogszabályokat és a Szolgáltató működési rendjét tiszteletben tartani. Mindemellett az Ügyfél a Szolgáltatás igénybevételekor köteles tiszteletben tartani az erre vonatkozó jogszabályi rendelkezéseket. Az Ügyfél köteles a Szolgáltatások nyújtásában a Szolgáltatóval illetőleg annak közreműködőivel, az orvossal, illetve az egyéb alkalmazottakkal együttműködni, ellenkező esetben a Szolgáltató jogosult megtagadni a Szolgáltatás nyújtását, melynek következményei az Ügyfelet terhelik.
+2025-12-19 15:42:35,764 | INFO | PREDICTED LABEL: 5-Könnyen érthető
+2025-12-19 15:42:35,764 | INFO | CONFIDENCE: 0.8244
+2025-12-19 15:42:35,764 | INFO | ===== FINAL MODEL PREDICTIONS =====
+2025-12-19 15:42:35,764 | INFO | Running inference with final embedding model
+2025-12-19 15:42:36,090 | INFO | ----------------------------------------
+2025-12-19 15:42:36,091 | INFO | TEXT: A Felek közötti megállapodást a jelen ÁSZF, a Szolgáltatási Szerződés és ezek mellékletei együttesen tartalmazzák. Bármilyen, a jelen ÁSZF, valamint a Szolgáltatási Szerződés és annak mellékletei eltérése esetén elsősorban a Szolgáltatási Szerződés és másodsorban a jelen ÁSZF rendelkezései az irányadóak.
+2025-12-19 15:42:36,091 | INFO | PREDICTED LABEL: 4-Érthető
+2025-12-19 15:42:36,091 | INFO | CONFIDENCE: 0.4036
+2025-12-19 15:42:36,091 | INFO | ----------------------------------------
+2025-12-19 15:42:36,091 | INFO | TEXT: Az Ügyfél köteles a Szolgáltatás igénybevételekor az erre vonatkozó jogszabályokat és a Szolgáltató működési rendjét tiszteletben tartani. Mindemellett az Ügyfél a Szolgáltatás igénybevételekor köteles tiszteletben tartani az erre vonatkozó jogszabályi rendelkezéseket. Az Ügyfél köteles a Szolgáltatások nyújtásában a Szolgáltatóval illetőleg annak közreműködőivel, az orvossal, illetve az egyéb alkalmazottakkal együttműködni, ellenkező esetben a Szolgáltató jogosult megtagadni a Szolgáltatás nyújtását, melynek következményei az Ügyfelet terhelik.
+2025-12-19 15:42:36,091 | INFO | PREDICTED LABEL: 4-Érthető
+2025-12-19 15:42:36,091 | INFO | CONFIDENCE: 0.3651
+2025-12-19 15:42:36,092 | INFO | ===== INFERENCE COMPLETED SUCCESSFULLY =====
+Pipeline finished successfully.
