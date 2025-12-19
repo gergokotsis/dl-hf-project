@@ -5,3 +5,4 @@ tensorflow==2.19.0
 tqdm==4.66.4
 matplotlib==3.8.4
 keras==3.10.0
+requests==2.32.4
