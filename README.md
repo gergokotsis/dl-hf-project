@@ -56,6 +56,7 @@ The repository is structured as follows:
     * 04-inference.py: Script for running the model on new, unseen data to generate predictions.
     * config.py: Configuration file containing hyperparameters (e.g., epochs) and paths.
     * utils.py: Helper functions and utilities used across different scripts.
+    * run.sh: Responsible for runing the pipeline.
 * notebook/: Contains Jupyter notebook for experimentation.
 
     * model_development.ipynb: Jupyter notebook containing the experimentation, that led to the final model.
@@ -68,3 +69,4 @@ The repository is structured as follows:
     * Dockerfile: Configuration file for building the Docker image with the necessary environment and dependencies.
     * requirements.txt: List of Python dependencies required for the project.
     * README.md: Project documentation and instructions.
+    * .gitattributes: Responsible for making sure git does not change LF to CRLF on the run.sh file 
